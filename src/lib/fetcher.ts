@@ -8,7 +8,7 @@ type Encode = 'text' | 'json' | 'buffer';
 
 type RequestOptions = {
   method?: http.RequestOptions["method"], 
-  headers?: http.OutgoingHttpHeaders | https.RequestOptions['headers'], 
+  headers?: http.OutgoingHttpHeaders,
   body?: string|object,
   encode?: Encode
 };
@@ -28,7 +28,7 @@ export function request(
           : parsedUrl.protocol == 'https:' 
             ? 443 
             : 80,
-        path: parsedUrl.pathname ?? "/",
+        path: (parsedUrl.pathname ?? "/") + parsedUrl.search,
         agent: parsedUrl.protocol === 'https:' ? httpsAgent : httpAgent,
         headers: options?.headers ?? {}
       };
@@ -52,8 +52,8 @@ export function request(
         });
       });
       req.on('error', err => reject(err));
-      if(options.method !== 'GET' && options.body) {
-        req.write(JSON.stringify(options.body));
+      if(options?.method !== 'GET' && options?.body) {
+        req.write(JSON.stringify(options?.body));
       }
       req.end();
     } catch(err) {
