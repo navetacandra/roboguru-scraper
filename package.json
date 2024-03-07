@@ -1,0 +1,22 @@
+{
+  "name": "roboguru-scrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node build",
+    "build": "tsc --build tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "navetacandra <naveta.cand@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "@types/uuid": "^9.0.8",
+    "typescript": "^5.4.2"
+  }
+}
