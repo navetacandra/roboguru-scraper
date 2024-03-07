@@ -1,4 +1,4 @@
-import { v4 as uuid } from 'uuid';
+import { randomUUID } from 'crypto';
 
 export type CookieObj = {
   __rg_cookie_id__: string;
@@ -22,9 +22,9 @@ function generateUserID(): string {
 
 export function generateCookie(token?: {token: string, refreshToken: string}): string {
   const cookieObj: CookieObj = {
-    __rg_cookie_id__: uuid(),
-    _roboguruSession: uuid(),
-    __tracker_session_id__: uuid(),
+    __rg_cookie_id__: randomUUID(),
+    _roboguruSession: randomUUID(),
+    __tracker_session_id__: randomUUID(),
     role: "student",
     userID: generateUserID(),
     ...token

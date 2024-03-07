@@ -11,12 +11,8 @@
   "keywords": [],
   "author": "navetacandra <naveta.cand@gmail.com>",
   "license": "ISC",
-  "dependencies": {
-    "uuid": "^9.0.1"
-  },
   "devDependencies": {
     "@types/node": "^20.11.25",
-    "@types/uuid": "^9.0.8",
     "typescript": "^5.4.2"
   }
 }
