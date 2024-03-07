@@ -15,13 +15,13 @@ type RequestOptions = {
 
 export function request(
   url: string, 
-  options: RequestOptions
+  options?: RequestOptions
   ): Promise<Buffer|object|string> {
   return new Promise((resolve, reject) => {
     try {
       const parsedUrl: UrlObject = new URL(url);
       const reqOptions: http.RequestOptions = {
-        method: options.method ?? "GET",
+        method: options?.method ?? "GET",
         hostname: parsedUrl.hostname ?? "",
         port: parsedUrl.port 
           ? parsedUrl.port
@@ -30,7 +30,7 @@ export function request(
             : 80,
         path: parsedUrl.pathname ?? "/",
         agent: parsedUrl.protocol === 'https:' ? httpsAgent : httpAgent,
-        headers: options.headers ?? {}
+        headers: options?.headers ?? {}
       };
       const response: Buffer[]= [];
       const req = (parsedUrl.protocol === 'https:' ? https : http).request(reqOptions, (res) => {
@@ -42,9 +42,9 @@ export function request(
         res.on('error', err => reject(err));
         res.on('end', () => {
           const data = Buffer.concat(response);
-          if(options.encode === 'text') {
+          if(options?.encode === 'text') {
             resolve(data.toString());
-          } else if(options.encode === 'json') {
+          } else if(options?.encode === 'json') {
             resolve(JSON.parse(data.toString()));
           } else {
             resolve(data);
